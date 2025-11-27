@@ -1,0 +1,56 @@
+{
+  "jin4": {
+    "characterId": "jin4",
+    "name": "甚四",
+    "role": "co-prisoner",
+    "age": 35,
+    "description": "主人公と同じ牢に閉じ込められている囚人。知恵が回り、脱獄の方法を知っているようだが、信用できるかは不明。",
+    "trustLevelMax": 5,
+    "initialImages": {
+      "neutral": "/assets/characters/jin4/neutral.png",
+      "happy": "/assets/characters/jin4/happy.png",
+      "angry": "/assets/characters/jin4/angry.png",
+      "suspicious": "/assets/characters/jin4/suspicious.png"
+    }
+  },
+  "otsu": {
+    "characterId": "otsu",
+    "name": "お通",
+    "role": "village_girl",
+    "age": 22,
+    "description": "城下町の娘。城主の不正を知り、証拠を持っている可能性がある。主人公を助けようとしている。",
+    "trustLevelMax": 5,
+    "initialImages": {
+      "neutral": "/assets/characters/otsu/neutral.png",
+      "happy": "/assets/characters/otsu/happy.png",
+      "sad": "/assets/characters/otsu/sad.png",
+      "worried": "/assets/characters/otsu/worried.png"
+    }
+  },
+  "jiheibei": {
+    "characterId": "jiheibei",
+    "name": "治兵衛",
+    "role": "merchant",
+    "age": 45,
+    "description": "城下町の商人。城主との取引で利益を得ているが、内心では不満を抱いている。",
+    "trustLevelMax": 5,
+    "initialImages": {
+      "neutral": "/assets/characters/jiheibei/neutral.png",
+      "happy": "/assets/characters/jiheibei/happy.png",
+      "angry": "/assets/characters/jiheibei/angry.png"
+    }
+  },
+  "kito": {
+    "characterId": "kito",
+    "name": "鬼頭",
+    "role": "guard",
+    "age": 40,
+    "description": "牢番を務める武士。厳格だが、正義感が強い。城主の命令に従っているが、疑問を抱いている。",
+    "trustLevelMax": 5,
+    "initialImages": {
+      "neutral": "/assets/characters/kito/neutral.png",
+      "serious": "/assets/characters/kito/serious.png",
+      "angry": "/assets/characters/kito/angry.png"
+    }
+  }
+}

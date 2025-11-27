@@ -1,0 +1,88 @@
+[
+  {
+    "endingId": "ending_be1",
+    "endingType": "badEnding",
+    "title": "支配者への道",
+    "requiredFlags": [
+      {
+        "flagName": "loopFlags.loop_4.personal_escape_chosen",
+        "requiredValue": true,
+        "comparison": "eq"
+      },
+      {
+        "flagName": "characterTrustLevels.jin4",
+        "requiredValue": 3,
+        "comparison": "gte"
+      }
+    ],
+    "endingSceneId": "ending_be1_scene",
+    "narrative": "主人公は甚四と共に脱獄に成功するが、その過程で村人を見捨てた。やがて主人公は権力を手に入れ、かつての城主と同じ道を歩むことになる...",
+    "displayOrder": 1
+  },
+  {
+    "endingId": "ending_be2",
+    "endingType": "badEnding",
+    "title": "孤独な逃亡者",
+    "requiredFlags": [
+      {
+        "flagName": "loopFlags.loop_5.escaped",
+        "requiredValue": true,
+        "comparison": "eq"
+      },
+      {
+        "flagName": "characterTrustLevels.jin4",
+        "requiredValue": 1,
+        "comparison": "lte"
+      }
+    ],
+    "endingSceneId": "ending_be2_scene",
+    "narrative": "主人公は一人で脱獄に成功するが、誰も信じず、誰も救わなかった。孤独な逃亡者として、永遠に追われ続ける運命となる...",
+    "displayOrder": 2
+  },
+  {
+    "endingId": "ending_be3",
+    "endingType": "badEnding",
+    "title": "城主への服従",
+    "requiredFlags": [
+      {
+        "flagName": "globalFlags.masterBetrayal",
+        "requiredValue": true,
+        "comparison": "eq"
+      }
+    ],
+    "endingSceneId": "ending_be3_scene",
+    "narrative": "主人公は城主に媚びへつらい、処刑を免れた。しかし、その代償として、村人を裏切り、城主の手先となる道を選んだ...",
+    "displayOrder": 3
+  },
+  {
+    "endingId": "ending_true",
+    "endingType": "trueEnding",
+    "title": "解放と共生",
+    "requiredFlags": [
+      {
+        "flagName": "loopFlags.loop_6.village_uprising_chosen",
+        "requiredValue": true,
+        "comparison": "eq"
+      },
+      {
+        "flagName": "characterTrustLevels.jin4",
+        "requiredValue": 3,
+        "comparison": "gte"
+      },
+      {
+        "flagName": "characterTrustLevels.otsu",
+        "requiredValue": 3,
+        "comparison": "gte"
+      },
+      {
+        "flagName": "characterTrustLevels.jiheibei",
+        "requiredValue": 2,
+        "comparison": "gte"
+      }
+    ],
+    "endingSceneId": "ending_true_scene",
+    "narrative": "主人公は仲間と共に村全体を立ち上がらせ、城主の支配から解放された。真実が明らかになり、皆が自由を手に入れた。これこそが、本当の脱獄だった...",
+    "achievementUnlocked": "true_ending_first",
+    "displayOrder": 4
+  }
+]

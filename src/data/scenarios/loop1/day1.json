@@ -1,0 +1,325 @@
+{
+  "scenes": [
+    {
+      "sceneId": "loop1_day1_opening",
+      "loopId": 1,
+      "dayId": 1,
+      "title": "牢獄での目覚め",
+      "narrative": {
+        "text": "目が覚めると、そこは暗い牢獄だった。頭が痛い。何があった...？記憶が曖昧だ。ああ、そうだ。お前は処刑を待つ罪人なのだ。あと7日で処刑される運命にある。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_001",
+          "text": "周囲を確認する",
+          "nextSceneId": "loop1_day1_examine_cell",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day1_examine_cell",
+      "loopId": 1,
+      "dayId": 1,
+      "title": "牢の確認",
+      "narrative": {
+        "text": "牢の中を見渡す。石造りの壁、鉄格子の扉。脱出は不可能に見える。隣の牢には、一人の男が座っている。髭を生やした、年配の男だ。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "neutral"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_002",
+          "text": "隣の男に話しかける",
+          "nextSceneId": "loop1_day1_meet_jin4",
+          "flagsApplied": [
+            {
+              "flagType": "loopFlag",
+              "targetId": "loopFlags.loop_1.jin4_met",
+              "operation": "set",
+              "value": true
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        },
+        {
+          "choiceId": "choice_003",
+          "text": "黙って様子を見る",
+          "nextSceneId": "loop1_day1_silent",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day1_meet_jin4",
+      "loopId": 1,
+      "dayId": 1,
+      "title": "甚四との出会い",
+      "narrative": {
+        "text": "おい、そこの...何か知らないか？ここから出る方法は？",
+        "speaker": "protagonist"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "suspicious"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_004",
+          "text": "次へ",
+          "nextSceneId": "loop1_day1_jin4_response",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day1_jin4_response",
+      "loopId": 1,
+      "dayId": 1,
+      "title": "甚四の返答",
+      "narrative": {
+        "text": "フン、出る方法だと？そんなもんがあるなら、俺がとっくに出ているわ。だが...もしかしたら、方法はあるかもしれんがな。",
+        "speaker": "jin4"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "suspicious"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_005",
+          "text": "詳しく聞く",
+          "nextSceneId": "loop1_day1_jin4_detail",
+          "flagsApplied": [
+            {
+              "flagType": "characterTrust",
+              "targetId": "jin4",
+              "operation": "increase",
+              "value": 1,
+              "maxValue": 5
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        },
+        {
+          "choiceId": "choice_006",
+          "text": "信用できない",
+          "nextSceneId": "loop1_day1_distrust",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day1_jin4_detail",
+      "loopId": 1,
+      "dayId": 1,
+      "title": "甚四の話",
+      "narrative": {
+        "text": "城下町には、城主の不正を知る者がいる。その証拠を掴めば、処刑を免れるかもしれん。だが、時間は限られている。7日後には、お前も俺も処刑されるんだからな。",
+        "speaker": "jin4"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "neutral"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_007",
+          "text": "協力を申し出る",
+          "nextSceneId": "loop1_day1_cooperate",
+          "flagsApplied": [
+            {
+              "flagType": "characterTrust",
+              "targetId": "jin4",
+              "operation": "increase",
+              "value": 1,
+              "maxValue": 5
+            },
+            {
+              "flagType": "loopFlag",
+              "targetId": "loopFlags.loop_1.jin4_trust",
+              "operation": "set",
+              "value": 1
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        },
+        {
+          "choiceId": "choice_008",
+          "text": "自分で考える",
+          "nextSceneId": "loop1_day1_alone",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day1_cooperate",
+      "loopId": 1,
+      "dayId": 1,
+      "title": "協力の約束",
+      "narrative": {
+        "text": "わかった。一緒に脱獄の方法を探そう。互いに協力すれば、きっと道は開ける。",
+        "speaker": "protagonist"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "happy"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_009",
+          "text": "次へ",
+          "nextSceneId": "loop1_day1_end",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day1_alone",
+      "loopId": 1,
+      "dayId": 1,
+      "title": "単独行動",
+      "narrative": {
+        "text": "すまないが、俺は自分で考える。他人を信用できるほど、状況は甘くない。",
+        "speaker": "protagonist"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "angry"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_010",
+          "text": "次へ",
+          "nextSceneId": "loop1_day1_end",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day1_distrust",
+      "loopId": 1,
+      "dayId": 1,
+      "title": "不信感",
+      "narrative": {
+        "text": "いきなりそんなことを言われても、信用できない。お前は何者だ？",
+        "speaker": "protagonist"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "angry"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_011",
+          "text": "次へ",
+          "nextSceneId": "loop1_day1_end",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day1_silent",
+      "loopId": 1,
+      "dayId": 1,
+      "title": "沈黙",
+      "narrative": {
+        "text": "お前は黙って座り続けた。隣の男も何も言わず、時間だけが過ぎていく。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "neutral"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_012",
+          "text": "次へ",
+          "nextSceneId": "loop1_day1_end",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day1_end",
+      "loopId": 1,
+      "dayId": 1,
+      "title": "1日目終了",
+      "narrative": {
+        "text": "こうして、牢獄での最初の日が終わった。残り6日。お前はこの運命を変えることができるのだろうか...？",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_013",
+          "text": "2日目へ",
+          "nextSceneId": "loop1_day2_opening",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}
