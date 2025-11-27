@@ -1,0 +1,204 @@
+{
+  "scenes": [
+    {
+      "sceneId": "loop1_day4_opening",
+      "loopId": 1,
+      "dayId": 4,
+      "title": "4日目 - 転換点",
+      "narrative": {
+        "text": "4日目。処刑まであと3日。この日、運命が動き始める。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day4_001",
+          "text": "次へ",
+          "nextSceneId": "loop1_day4_otsu_appears",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day4_otsu_appears",
+      "loopId": 1,
+      "dayId": 4,
+      "title": "お通の登場",
+      "narrative": {
+        "text": "牢の外から、若い女の声が聞こえてきた。「...あなたが、甚四さんが言っていた...」",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "otsu",
+          "xPosition": "left",
+          "expression": "worried"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day4_002",
+          "text": "あなたがお通か？",
+          "nextSceneId": "loop1_day4_otsu_intro",
+          "flagsApplied": [
+            {
+              "flagType": "loopFlag",
+              "targetId": "loopFlags.loop_1.otsu_met",
+              "operation": "set",
+              "value": true
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day4_otsu_intro",
+      "loopId": 1,
+      "dayId": 4,
+      "title": "お通との出会い",
+      "narrative": {
+        "text": "はい...私がお通です。父は城主に殺されました。あなたが、本当に無実なら...力になりたい。",
+        "speaker": "otsu"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "otsu",
+          "xPosition": "left",
+          "expression": "sad"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day4_003",
+          "text": "証拠を見せてくれ",
+          "nextSceneId": "loop1_day4_ask_evidence",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        },
+        {
+          "choiceId": "choice_day4_004",
+          "text": "まずお前の話を聞こう",
+          "nextSceneId": "loop1_day4_listen_otsu",
+          "flagsApplied": [
+            {
+              "flagType": "characterTrust",
+              "targetId": "otsu",
+              "operation": "increase",
+              "value": 1,
+              "maxValue": 5
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day4_ask_evidence",
+      "loopId": 1,
+      "dayId": 4,
+      "title": "証拠の要求",
+      "narrative": {
+        "text": "証拠...それは簡単には渡せません。まだあなたを信用できないから。",
+        "speaker": "otsu"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "otsu",
+          "xPosition": "left",
+          "expression": "worried"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day4_005",
+          "text": "5日目へ",
+          "nextSceneId": "loop1_day5_opening",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day4_listen_otsu",
+      "loopId": 1,
+      "dayId": 4,
+      "title": "お通の物語",
+      "narrative": {
+        "text": "父は正直な商人でした。城主の不正を知り、告発しようとした。その夜、父は殺されました...事故として処理されましたが、私は真実を知っています。",
+        "speaker": "otsu"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "otsu",
+          "xPosition": "left",
+          "expression": "sad"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day4_006",
+          "text": "必ず真実を明らかにする",
+          "nextSceneId": "loop1_day4_promise",
+          "flagsApplied": [
+            {
+              "flagType": "characterTrust",
+              "targetId": "otsu",
+              "operation": "increase",
+              "value": 1,
+              "maxValue": 5
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day4_promise",
+      "loopId": 1,
+      "dayId": 4,
+      "title": "約束",
+      "narrative": {
+        "text": "...ありがとう。あなたを信じます。次に会うとき、証拠を持ってきます。",
+        "speaker": "otsu"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "otsu",
+          "xPosition": "left",
+          "expression": "happy"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day4_007",
+          "text": "5日目へ",
+          "nextSceneId": "loop1_day5_opening",
+          "flagsApplied": [
+            {
+              "flagType": "loopFlag",
+              "targetId": "loopFlags.loop_1.otsu_trust_gained",
+              "operation": "set",
+              "value": true
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

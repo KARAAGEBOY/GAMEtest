@@ -1,0 +1,176 @@
+{
+  "scenes": [
+    {
+      "sceneId": "loop1_day6_opening",
+      "loopId": 1,
+      "dayId": 6,
+      "title": "6日目 - 最後の計画",
+      "narrative": {
+        "text": "6日目。処刑まであと1日。今日が最後のチャンスだ。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day6_001",
+          "text": "甚四に相談する",
+          "nextSceneId": "loop1_day6_consult_jin4",
+          "flagsApplied": [],
+          "conditionRequired": {
+            "type": "loopFlag",
+            "flagName": "loopFlags.loop_1.evidence_found",
+            "operator": "eq",
+            "value": true
+          },
+          "visible": true
+        },
+        {
+          "choiceId": "choice_day6_002",
+          "text": "自力で脱獄を試みる",
+          "nextSceneId": "loop1_day6_solo_escape",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day6_consult_jin4",
+      "loopId": 1,
+      "dayId": 6,
+      "title": "甚四との相談",
+      "narrative": {
+        "text": "甚四、証拠を手に入れた。これをどう使えばいい？",
+        "speaker": "protagonist"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "serious"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day6_003",
+          "text": "次へ",
+          "nextSceneId": "loop1_day6_jin4_plan",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day6_jin4_plan",
+      "loopId": 1,
+      "dayId": 6,
+      "title": "脱獄計画",
+      "narrative": {
+        "text": "明日の処刑前に、その証拠を民衆に見せるんだ。民衆が蜂起すれば、城主も手を出せない。だが...失敗すれば、お前もお通も殺される。",
+        "speaker": "jin4"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "neutral"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day6_004",
+          "text": "やるしかない",
+          "nextSceneId": "loop1_day6_決意",
+          "flagsApplied": [
+            {
+              "flagType": "loopFlag",
+              "targetId": "loopFlags.loop_1.escape_plan_set",
+              "operation": "set",
+              "value": true
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        },
+        {
+          "choiceId": "choice_day6_005",
+          "text": "諦める",
+          "nextSceneId": "loop1_day6_give_up",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day6_決意",
+      "loopId": 1,
+      "dayId": 6,
+      "title": "決意",
+      "narrative": {
+        "text": "そうだ。やるしかない。明日、すべてが決まる。",
+        "speaker": "protagonist"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day6_006",
+          "text": "7日目へ",
+          "nextSceneId": "loop1_day7_opening",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day6_give_up",
+      "loopId": 1,
+      "dayId": 6,
+      "title": "諦め",
+      "narrative": {
+        "text": "いや...無理だ。民衆を巻き込むわけにはいかない。運命を受け入れよう。",
+        "speaker": "protagonist"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day6_007",
+          "text": "7日目へ",
+          "nextSceneId": "loop1_day7_opening",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day6_solo_escape",
+      "loopId": 1,
+      "dayId": 6,
+      "title": "単独脱獄の試み",
+      "narrative": {
+        "text": "お前は力ずくで牢を破ろうとした。だが、鉄格子は頑丈で、びくともしない。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day6_008",
+          "text": "7日目へ",
+          "nextSceneId": "loop1_day7_opening",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

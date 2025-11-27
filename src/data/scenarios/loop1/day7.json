@@ -1,0 +1,185 @@
+{
+  "scenes": [
+    {
+      "sceneId": "loop1_day7_opening",
+      "loopId": 1,
+      "dayId": 7,
+      "title": "7日目 - 処刑の日",
+      "narrative": {
+        "text": "7日目。処刑の日が来た。牢番たちがお前を引き出しにやってくる。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day7_001",
+          "text": "次へ",
+          "nextSceneId": "loop1_day7_execution_ground",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day7_execution_ground",
+      "loopId": 1,
+      "dayId": 7,
+      "title": "処刑場",
+      "narrative": {
+        "text": "処刑場に引き出された。群衆が取り囲んでいる。城主が高台から見下ろしている。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day7_002",
+          "text": "証拠を民衆に見せる",
+          "nextSceneId": "loop1_day7_show_evidence",
+          "flagsApplied": [],
+          "conditionRequired": {
+            "type": "loopFlag",
+            "flagName": "loopFlags.loop_1.escape_plan_set",
+            "operator": "eq",
+            "value": true
+          },
+          "visible": true
+        },
+        {
+          "choiceId": "choice_day7_003",
+          "text": "運命を受け入れる",
+          "nextSceneId": "loop1_day7_accept_fate",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day7_show_evidence",
+      "loopId": 1,
+      "dayId": 7,
+      "title": "証拠の開示",
+      "narrative": {
+        "text": "お前は証拠を掲げ、城主の不正を叫んだ。だが...城主の兵士たちがすぐに動き、証拠を奪い取った。民衆は恐れて動かない。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day7_004",
+          "text": "次へ",
+          "nextSceneId": "loop1_day7_failure",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day7_accept_fate",
+      "loopId": 1,
+      "dayId": 7,
+      "title": "運命の受容",
+      "narrative": {
+        "text": "お前は何も言わず、処刑台に立った。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day7_005",
+          "text": "次へ",
+          "nextSceneId": "loop1_day7_execution",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day7_failure",
+      "loopId": 1,
+      "dayId": 7,
+      "title": "失敗",
+      "narrative": {
+        "text": "城主の声が響く。「反逆者め。今すぐ処刑しろ。」刃が振り下ろされる――",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day7_006",
+          "text": "次へ",
+          "nextSceneId": "loop1_day7_execution",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day7_execution",
+      "loopId": 1,
+      "dayId": 7,
+      "title": "処刑",
+      "narrative": {
+        "text": "刃が首筋に触れた瞬間――すべてが白く染まった。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day7_007",
+          "text": "次へ",
+          "nextSceneId": "loop1_day7_timeloop_reset",
+          "flagsApplied": [
+            {
+              "flagType": "loopFlag",
+              "targetId": "loopFlags.loop_1.executionDate",
+              "operation": "set",
+              "value": true
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day7_timeloop_reset",
+      "loopId": 1,
+      "dayId": 7,
+      "title": "タイムループ",
+      "narrative": {
+        "text": "――気がつくと、お前は暗い牢獄の中にいた。また、あの日に戻っている。処刑まであと7日...これは2度目だ。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day7_008",
+          "text": "ループ2へ",
+          "nextSceneId": "loop2_day1_opening",
+          "flagsApplied": [
+            {
+              "flagType": "globalFlag",
+              "targetId": "firstLoopCompleted",
+              "operation": "set",
+              "value": true
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

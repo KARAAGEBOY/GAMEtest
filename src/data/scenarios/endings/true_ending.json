@@ -1,0 +1,114 @@
+{
+  "scenes": [
+    {
+      "sceneId": "ending_true_scene",
+      "loopId": 6,
+      "dayId": 7,
+      "title": "トゥルーエンド: 解放と共生",
+      "narrative": {
+        "text": "甚四、お通、治兵衛、鬼頭。すべての仲間と共に立ち上がった。民衆もついに動いた。城主の支配が終わる。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "left",
+          "expression": "happy"
+        },
+        {
+          "characterId": "otsu",
+          "xPosition": "center",
+          "expression": "happy"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "ending_true_001",
+          "text": "次へ",
+          "nextSceneId": "ending_true_continuation",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "ending_true_continuation",
+      "loopId": 6,
+      "dayId": 7,
+      "title": "新しい時代",
+      "narrative": {
+        "text": "処刑場で真実が明らかになった。城主は失脚し、村は自由を取り戻した。タイムループも終わりを告げる。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "ending_true_002",
+          "text": "次へ",
+          "nextSceneId": "ending_true_final",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "ending_true_final",
+      "loopId": 6,
+      "dayId": 7,
+      "title": "本当の脱獄",
+      "narrative": {
+        "text": "お前は牢獄から脱出した。そして、村全体も圧政という牢獄から脱出した。これこそが、本当の脱獄だ。仲間と共に歩む、新しい未来が始まる。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "left",
+          "expression": "happy"
+        },
+        {
+          "characterId": "otsu",
+          "xPosition": "center",
+          "expression": "happy"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "ending_true_003",
+          "text": "TRUE END",
+          "nextSceneId": "ending_credits",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "ending_credits",
+      "loopId": 6,
+      "dayId": 7,
+      "title": "エンディング",
+      "narrative": {
+        "text": "プレイしていただき、ありがとうございました。『脱獄 ～7日間のタイムループ～』",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "ending_credits_001",
+          "text": "タイトルに戻る",
+          "nextSceneId": "loop1_day1_opening",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "scenes": [
+    {
+      "sceneId": "ending_be2_scene",
+      "loopId": 6,
+      "dayId": 7,
+      "title": "バッドエンド2: 孤独な逃亡者",
+      "narrative": {
+        "text": "お前は一人で脱獄に成功した。誰も信じず、誰にも助けを求めなかった。自由を手に入れたが、代償は大きかった。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "ending_be2_001",
+          "text": "次へ",
+          "nextSceneId": "ending_be2_continuation",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "ending_be2_continuation",
+      "loopId": 6,
+      "dayId": 7,
+      "title": "永遠の逃亡",
+      "narrative": {
+        "text": "追手に追われ続ける日々。信頼できる仲間もいない。自由を得たはずが、牢獄にいた時よりも不自由だ。孤独が心を蝕んでいく...。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "ending_be2_002",
+          "text": "BAD END",
+          "nextSceneId": "ending_credits",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

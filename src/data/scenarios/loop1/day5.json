@@ -1,0 +1,146 @@
+{
+  "scenes": [
+    {
+      "sceneId": "loop1_day5_opening",
+      "loopId": 1,
+      "dayId": 5,
+      "title": "5日目 - 希望の光",
+      "narrative": {
+        "text": "5日目。処刑まであと2日。お通が約束通り、証拠を持ってくるだろうか。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day5_001",
+          "text": "次へ",
+          "nextSceneId": "loop1_day5_otsu_returns",
+          "flagsApplied": [],
+          "conditionRequired": {
+            "type": "loopFlag",
+            "flagName": "loopFlags.loop_1.otsu_trust_gained",
+            "operator": "eq",
+            "value": true
+          },
+          "visible": true
+        },
+        {
+          "choiceId": "choice_day5_002",
+          "text": "一人で考える",
+          "nextSceneId": "loop1_day5_alone",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day5_otsu_returns",
+      "loopId": 1,
+      "dayId": 5,
+      "title": "お通の帰還",
+      "narrative": {
+        "text": "お通が戻ってきた。手には古びた書状を持っている。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "otsu",
+          "xPosition": "left",
+          "expression": "neutral"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day5_003",
+          "text": "次へ",
+          "nextSceneId": "loop1_day5_evidence",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day5_evidence",
+      "loopId": 1,
+      "dayId": 5,
+      "title": "証拠",
+      "narrative": {
+        "text": "これが証拠です。城主が税を横領していた記録。父が命をかけて守った証拠です。",
+        "speaker": "otsu"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "otsu",
+          "xPosition": "left",
+          "expression": "serious"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day5_004",
+          "text": "これで無実を証明できる",
+          "nextSceneId": "loop1_day5_hope",
+          "flagsApplied": [
+            {
+              "flagType": "loopFlag",
+              "targetId": "loopFlags.loop_1.evidence_found",
+              "operation": "set",
+              "value": true
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day5_hope",
+      "loopId": 1,
+      "dayId": 5,
+      "title": "希望",
+      "narrative": {
+        "text": "だが、誰にこれを見せればいい？城主の配下は皆、彼の手下だ。明日、甚四と相談しよう。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day5_005",
+          "text": "6日目へ",
+          "nextSceneId": "loop1_day6_opening",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day5_alone",
+      "loopId": 1,
+      "dayId": 5,
+      "title": "孤独な5日目",
+      "narrative": {
+        "text": "お通は来なかった。自分だけで何とかするしかない...だが、もう時間がない。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day5_006",
+          "text": "6日目へ",
+          "nextSceneId": "loop1_day6_opening",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

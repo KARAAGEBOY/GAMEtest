@@ -1,0 +1,155 @@
+{
+  "scenes": [
+    {
+      "sceneId": "loop1_day3_opening",
+      "loopId": 1,
+      "dayId": 3,
+      "title": "3日目の朝",
+      "narrative": {
+        "text": "3日目の朝。処刑まであと4日。牢番の足音が近づいてくる...",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day3_001",
+          "text": "次へ",
+          "nextSceneId": "loop1_day3_guard_visit",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day3_guard_visit",
+      "loopId": 1,
+      "dayId": 3,
+      "title": "牢番の訪問",
+      "narrative": {
+        "text": "牢番の鬼頭が牢の前に立った。厳しい表情で、お前を見下ろしている。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "kito",
+          "xPosition": "center",
+          "expression": "serious"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day3_002",
+          "text": "鬼頭に話しかける",
+          "nextSceneId": "loop1_day3_talk_kito",
+          "flagsApplied": [
+            {
+              "flagType": "loopFlag",
+              "targetId": "loopFlags.loop_1.kito_met",
+              "operation": "set",
+              "value": true
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        },
+        {
+          "choiceId": "choice_day3_003",
+          "text": "黙って見つめる",
+          "nextSceneId": "loop1_day3_silent_kito",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day3_talk_kito",
+      "loopId": 1,
+      "dayId": 3,
+      "title": "鬼頭との会話",
+      "narrative": {
+        "text": "鬼頭殿...俺は本当に罪を犯したのか？この処刑は正しいのか？",
+        "speaker": "protagonist"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "kito",
+          "xPosition": "center",
+          "expression": "serious"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day3_004",
+          "text": "次へ",
+          "nextSceneId": "loop1_day3_kito_response",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day3_kito_response",
+      "loopId": 1,
+      "dayId": 3,
+      "title": "鬼頭の答え",
+      "narrative": {
+        "text": "...俺は命令に従うのみだ。だが、お前の目には嘘がない。これだけは言っておく。",
+        "speaker": "kito"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "kito",
+          "xPosition": "center",
+          "expression": "neutral"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day3_005",
+          "text": "4日目へ",
+          "nextSceneId": "loop1_day4_opening",
+          "flagsApplied": [
+            {
+              "flagType": "characterTrust",
+              "targetId": "kito",
+              "operation": "increase",
+              "value": 1,
+              "maxValue": 5
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day3_silent_kito",
+      "loopId": 1,
+      "dayId": 3,
+      "title": "沈黙",
+      "narrative": {
+        "text": "お前は何も言わず、鬼頭を見つめた。鬼頭も何も言わず、去っていった。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day3_006",
+          "text": "4日目へ",
+          "nextSceneId": "loop1_day4_opening",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

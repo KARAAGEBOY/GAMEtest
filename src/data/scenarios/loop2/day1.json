@@ -1,0 +1,147 @@
+{
+  "scenes": [
+    {
+      "sceneId": "loop2_day1_opening",
+      "loopId": 2,
+      "dayId": 1,
+      "title": "2度目のループ",
+      "narrative": {
+        "text": "また、この牢獄だ。2度目のループ。前回の記憶はすべて残っている。今度こそ、運命を変える。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_loop2_day1_001",
+          "text": "すぐに甚四に話しかける",
+          "nextSceneId": "loop2_day1_jin4",
+          "flagsApplied": [
+            {
+              "flagType": "loopFlag",
+              "targetId": "loopFlags.loop_2.jin4_met",
+              "operation": "set",
+              "value": true
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop2_day1_jin4",
+      "loopId": 2,
+      "dayId": 1,
+      "title": "甚四との再会",
+      "narrative": {
+        "text": "甚四、俺は未来を知っている。これはタイムループだ。証明してみせる。",
+        "speaker": "protagonist"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "suspicious"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_loop2_day1_002",
+          "text": "次へ",
+          "nextSceneId": "loop2_day1_jin4_reaction",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop2_day1_jin4_reaction",
+      "loopId": 2,
+      "dayId": 1,
+      "title": "甚四の反応",
+      "narrative": {
+        "text": "タイムループだと...？馬鹿な。だが、お前の目は本気だ。話を聞こう。",
+        "speaker": "jin4"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "neutral"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_loop2_day1_003",
+          "text": "前回のことを話す",
+          "nextSceneId": "loop2_day1_explain",
+          "flagsApplied": [
+            {
+              "flagType": "characterTrust",
+              "targetId": "jin4",
+              "operation": "increase",
+              "value": 2,
+              "maxValue": 5
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop2_day1_explain",
+      "loopId": 2,
+      "dayId": 1,
+      "title": "説明",
+      "narrative": {
+        "text": "前回、俺たちは証拠を手に入れたが、民衆は動かなかった。今回は違う方法を試す。",
+        "speaker": "protagonist"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "happy"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_loop2_day1_004",
+          "text": "2日目へ（※以降のシナリオは開発中）",
+          "nextSceneId": "loop2_placeholder",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop2_placeholder",
+      "loopId": 2,
+      "dayId": 2,
+      "title": "開発中",
+      "narrative": {
+        "text": "Loop 2以降のシナリオは現在開発中です。テストのため、タイトルに戻ります。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_loop2_placeholder",
+          "text": "タイトルに戻る",
+          "nextSceneId": "loop1_day1_opening",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "scenes": [
+    {
+      "sceneId": "ending_be3_scene",
+      "loopId": 6,
+      "dayId": 7,
+      "title": "バッドエンド3: 城主への服従",
+      "narrative": {
+        "text": "お前は城主に媚びへつらい、処刑を免れた。仲間を裏切り、民を見捨てた。命と引き換えに、魂を売ったのだ。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "ending_be3_001",
+          "text": "次へ",
+          "nextSceneId": "ending_be3_continuation",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "ending_be3_continuation",
+      "loopId": 6,
+      "dayId": 7,
+      "title": "裏切り者の末路",
+      "narrative": {
+        "text": "城主の手先として、民を苦しめる日々。お通も甚四も、お前を軽蔑の目で見る。生き延びたが、これは生きていると言えるのだろうか...。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "ending_be3_002",
+          "text": "BAD END",
+          "nextSceneId": "ending_credits",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

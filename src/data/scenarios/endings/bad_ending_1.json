@@ -1,0 +1,48 @@
+{
+  "scenes": [
+    {
+      "sceneId": "ending_be1_scene",
+      "loopId": 6,
+      "dayId": 7,
+      "title": "バッドエンド1: 支配者への道",
+      "narrative": {
+        "text": "お前は甚四と共に脱獄に成功した。タイムループの力を使い、すべてを操った。村人を見捨て、自分だけが生き延びた。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "ending_be1_001",
+          "text": "次へ",
+          "nextSceneId": "ending_be1_continuation",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "ending_be1_continuation",
+      "loopId": 6,
+      "dayId": 7,
+      "title": "堕ちた英雄",
+      "narrative": {
+        "text": "数年後、お前は城主の地位を奪った。だが、その方法は前の城主と同じだった。権力に溺れ、民を圧政で苦しめる。かつての自分を裏切って...。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "ending_be1_002",
+          "text": "BAD END",
+          "nextSceneId": "ending_credits",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}
