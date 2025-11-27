@@ -1,0 +1,261 @@
+{
+  "scenes": [
+    {
+      "sceneId": "loop1_day2_opening",
+      "loopId": 1,
+      "dayId": 2,
+      "title": "2日目の朝",
+      "narrative": {
+        "text": "2日目の朝が来た。牢の中は相変わらず暗く、湿っている。あと5日で処刑...時間は刻々と過ぎていく。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day2_001",
+          "text": "甚四に話しかける",
+          "nextSceneId": "loop1_day2_talk_jin4",
+          "flagsApplied": [],
+          "conditionRequired": {
+            "type": "loopFlag",
+            "flagName": "loopFlags.loop_1.jin4_met",
+            "operator": "eq",
+            "value": true
+          },
+          "visible": true
+        },
+        {
+          "choiceId": "choice_day2_002",
+          "text": "一人で考える",
+          "nextSceneId": "loop1_day2_think_alone",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day2_talk_jin4",
+      "loopId": 1,
+      "dayId": 2,
+      "title": "甚四との会話",
+      "narrative": {
+        "text": "おい、甚四。昨日の話の続きだが...城主の不正の証拠とやらは、本当にあるのか？",
+        "speaker": "protagonist"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "serious"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day2_003",
+          "text": "次へ",
+          "nextSceneId": "loop1_day2_jin4_explain",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day2_jin4_explain",
+      "loopId": 1,
+      "dayId": 2,
+      "title": "甚四の説明",
+      "narrative": {
+        "text": "ああ、ある。城下町の娘、お通が持っているはずだ。彼女の父親は城主に殺された。その真相を知る者は少ない。",
+        "speaker": "jin4"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "neutral"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day2_004",
+          "text": "お通に会いたい",
+          "nextSceneId": "loop1_day2_want_meet_otsu",
+          "flagsApplied": [
+            {
+              "flagType": "loopFlag",
+              "targetId": "loopFlags.loop_1.otsu_mentioned",
+              "operation": "set",
+              "value": true
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day2_want_meet_otsu",
+      "loopId": 1,
+      "dayId": 2,
+      "title": "お通への興味",
+      "narrative": {
+        "text": "そのお通という娘に会えないか？証拠を手に入れれば、処刑を止められるかもしれない。",
+        "speaker": "protagonist"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "neutral"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day2_005",
+          "text": "次へ",
+          "nextSceneId": "loop1_day2_jin4_promise",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day2_jin4_promise",
+      "loopId": 1,
+      "dayId": 2,
+      "title": "甚四の約束",
+      "narrative": {
+        "text": "俺が彼女に伝えておこう。だが、簡単には信用されないぞ。時間をかけて信頼を得る必要がある。",
+        "speaker": "jin4"
+      },
+      "backgroundImage": "",
+      "characters": [
+        {
+          "characterId": "jin4",
+          "xPosition": "right",
+          "expression": "neutral"
+        }
+      ],
+      "choices": [
+        {
+          "choiceId": "choice_day2_006",
+          "text": "3日目へ",
+          "nextSceneId": "loop1_day3_opening",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day2_think_alone",
+      "loopId": 1,
+      "dayId": 2,
+      "title": "孤独な思考",
+      "narrative": {
+        "text": "一人で考え込む。脱獄の方法は...力ずくで逃げるか、それとも別の手段を探すか。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day2_007",
+          "text": "力ずくで逃げる計画を立てる",
+          "nextSceneId": "loop1_day2_force_plan",
+          "flagsApplied": [
+            {
+              "flagType": "loopFlag",
+              "targetId": "loopFlags.loop_1.force_escape_planned",
+              "operation": "set",
+              "value": true
+            }
+          ],
+          "conditionRequired": null,
+          "visible": true
+        },
+        {
+          "choiceId": "choice_day2_008",
+          "text": "もう少し様子を見る",
+          "nextSceneId": "loop1_day2_wait",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day2_force_plan",
+      "loopId": 1,
+      "dayId": 2,
+      "title": "力ずくの計画",
+      "narrative": {
+        "text": "力ずくで逃げる...だが、牢番は武装している。成功の可能性は低い。もっと情報が必要だ。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day2_009",
+          "text": "3日目へ",
+          "nextSceneId": "loop1_day3_opening",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day2_wait",
+      "loopId": 1,
+      "dayId": 2,
+      "title": "待機",
+      "narrative": {
+        "text": "もう少し様子を見よう。焦っては良い結果は生まれない。",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day2_010",
+          "text": "3日目へ",
+          "nextSceneId": "loop1_day3_opening",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "sceneId": "loop1_day3_opening",
+      "loopId": 1,
+      "dayId": 3,
+      "title": "3日目の朝",
+      "narrative": {
+        "text": "3日目の朝。処刑まであと4日。時間は刻々と過ぎていく...(この先のシナリオは未実装)",
+        "speaker": "narrator"
+      },
+      "backgroundImage": "",
+      "characters": [],
+      "choices": [
+        {
+          "choiceId": "choice_day3_001",
+          "text": "タイトルに戻る",
+          "nextSceneId": "loop1_day1_opening",
+          "flagsApplied": [],
+          "conditionRequired": null,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

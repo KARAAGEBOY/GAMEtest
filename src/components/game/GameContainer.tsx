@@ -8,25 +8,33 @@ import BackgroundLayer from './BackgroundLayer';
 import CharacterLayer from './CharacterLayer';
 import { ScenarioEngine } from '@/features/scenario/ScenarioEngine';
 import { FlagManager } from '@/features/flag/FlagManager';
+import { ChoiceHandler } from '@/features/choice/ChoiceHandler';
+import { Choice } from '@/types';
 
 const GameContainer: React.FC = () => {
   const dispatch = useAppDispatch();
   const currentScene = useAppSelector((state) => state.game.currentScene);
   const flagSystem = useAppSelector((state) => state.game.flagSystem);
 
-  const [scenarioEngine] = useState(() => {
+  const [managers] = useState(() => {
     const flagManager = new FlagManager(flagSystem);
-    return new ScenarioEngine(flagManager);
+    const scenarioEngine = new ScenarioEngine(flagManager);
+    const choiceHandler = new ChoiceHandler(flagManager, scenarioEngine);
+    return { flagManager, scenarioEngine, choiceHandler };
   });
 
   useEffect(() => {
     // 初回シーンの読み込み
     if (!currentScene) {
-      scenarioEngine.loadScene('loop1_day1_opening').then((scene) => {
+      managers.scenarioEngine.loadScene('loop1_day1_opening').then((scene) => {
         dispatch(setCurrentScene(scene));
       });
     }
-  }, [currentScene, dispatch, scenarioEngine]);
+  }, [currentScene, dispatch, managers.scenarioEngine]);
+
+  const handleChoiceSelect = (choice: Choice) => {
+    managers.choiceHandler.handleChoice(choice);
+  };
 
   if (!currentScene) {
     return (
@@ -53,10 +61,7 @@ const GameContainer: React.FC = () => {
           {currentScene.choices.length > 0 && (
             <ChoiceList
               choices={currentScene.choices}
-              onChoiceSelect={(choice) => {
-                // 選択肢処理（後で実装）
-                console.log('Choice selected:', choice);
-              }}
+              onChoiceSelect={handleChoiceSelect}
             />
           )}
         </div>
