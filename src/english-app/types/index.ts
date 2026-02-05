@@ -1,4 +1,5 @@
 // English Booster 30 - Type Definitions
+// Redesigned: 15 sessions every other day, 1 hour each
 
 export interface Phrase {
   id: string;
@@ -6,7 +7,7 @@ export interface Phrase {
   japanese: string;
   pronunciation: string;
   category: Category;
-  day: number;
+  session: number; // 1-15
   example?: string;
   exampleJa?: string;
 }
@@ -23,20 +24,35 @@ export type Category =
   | 'opinion'
   | 'emotion';
 
-export interface DayLesson {
-  day: number;
+// A single learning session (every other day, 1 hour)
+export interface Session {
+  session: number;       // 1-15
+  calendarDay: number;   // Actual day in the 30-day plan (1,3,5,...,29)
   title: string;
   titleJa: string;
   description: string;
   category: Category;
   phrases: Phrase[];
+  // 1-hour session breakdown (minutes)
+  timeAllocation: SessionTimeAllocation;
 }
 
+export interface SessionTimeAllocation {
+  phraseStudy: number;    // 15 min
+  listening: number;      // 15 min
+  speaking: number;       // 15 min
+  quizReview: number;     // 15 min
+}
+
+// Session step within a 1-hour session
+export type SessionStep = 'overview' | 'phrases' | 'listening' | 'speaking' | 'quiz' | 'complete';
+
 export interface UserProgress {
-  currentDay: number;
-  completedDays: number[];
-  streak: number;
+  currentSession: number;       // 1-15
+  completedSessions: number[];
+  streak: number;               // consecutive sessions completed
   lastStudyDate: string;
+  startDate: string;            // When the 30-day program started
   masteredPhrases: string[];
   reviewPhrases: string[];
   badges: Badge[];
@@ -59,7 +75,9 @@ export type BadgeType =
   | 'perfect_quiz'
   | 'speaking_master'
   | 'halfway'
-  | 'completion';
+  | 'completion'
+  | 'hour_warrior'
+  | 'consistency';
 
 export interface Badge {
   id: BadgeType;
@@ -88,7 +106,7 @@ export interface SpeechResult {
 export type ViewType =
   | 'home'
   | 'lesson'
-  | 'lesson-detail'
+  | 'session-flow'
   | 'speaking'
   | 'listening'
   | 'flashcard'
@@ -97,7 +115,8 @@ export type ViewType =
 
 export interface AppState {
   currentView: ViewType;
-  selectedDay: number | null;
+  selectedSession: number | null;
+  currentStep: SessionStep;
   isLoading: boolean;
   error: string | null;
 }

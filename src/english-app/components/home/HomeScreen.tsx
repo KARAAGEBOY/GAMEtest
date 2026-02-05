@@ -1,22 +1,23 @@
 import React, { useEffect } from 'react';
 import { useAppStore } from '../../stores/useAppStore';
 import { Header } from '../common/Header';
-import { dayLessons } from '../../data/phrases';
+import { sessions } from '../../data/phrases';
 
 export const HomeScreen: React.FC = () => {
-  const { darkMode, progress, setView, selectDay, updateStreak, startSession } = useAppStore();
+  const { darkMode, progress, placementScore, setView, selectSession, updateStreak, startSession } = useAppStore();
 
   useEffect(() => {
     updateStreak();
+  }, [updateStreak]);
+
+  const currentSessionData = sessions.find(s => s.session === progress.currentSession) || sessions[0];
+  const completionRate = Math.round((progress.completedSessions.length / 15) * 100);
+  const nextSession = Math.min(progress.currentSession, 15);
+
+  const handleStartSession = () => {
+    selectSession(nextSession);
     startSession();
-  }, [updateStreak, startSession]);
-
-  const todayLesson = dayLessons.find(l => l.day === progress.currentDay) || dayLessons[0];
-  const completionRate = Math.round((progress.completedDays.length / 30) * 100);
-
-  const handleStartLesson = () => {
-    selectDay(progress.currentDay);
-    setView('lesson-detail');
+    setView('session-flow');
   };
 
   return (
@@ -26,19 +27,47 @@ export const HomeScreen: React.FC = () => {
       <main className="max-w-lg mx-auto px-4 py-6 space-y-6">
         {/* Welcome Banner */}
         <div className={`rounded-2xl p-6 ${darkMode ? 'bg-gradient-to-r from-blue-900 to-purple-900' : 'bg-gradient-to-r from-blue-500 to-purple-600'} text-white`}>
-          <h2 className="text-xl font-bold mb-2">
-            Day {progress.currentDay} of 30
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-sm bg-white/20 px-2 py-0.5 rounded-full">
+              Session {nextSession} / 15
+            </span>
+            <span className="text-sm bg-white/20 px-2 py-0.5 rounded-full">
+              Day {currentSessionData.calendarDay}
+            </span>
+          </div>
+          <h2 className="text-xl font-bold mb-1">
+            {currentSessionData.titleJa}
           </h2>
-          <p className="text-blue-100 mb-4">
-            {todayLesson.titleJa} - {todayLesson.title}
+          <p className="text-blue-100 mb-4 text-sm">
+            {currentSessionData.title} - {currentSessionData.description}
           </p>
           <button
-            onClick={handleStartLesson}
+            onClick={handleStartSession}
             className="w-full py-3 bg-white text-blue-600 font-semibold rounded-xl hover:bg-blue-50 transition-colors"
           >
-            Start Today's Lesson
+            {progress.completedSessions.includes(nextSession)
+              ? 'Review This Session'
+              : 'Start 1-Hour Session'}
           </button>
         </div>
+
+        {/* Placement Score */}
+        {placementScore !== null && (
+          <div className={`rounded-2xl p-4 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-sm`}>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Placement Score</p>
+                <p className={`text-2xl font-bold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>{placementScore}%</p>
+              </div>
+              <div className="text-right">
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Target</p>
+                <p className={`text-2xl font-bold ${darkMode ? 'text-green-400' : 'text-green-600'}`}>
+                  {Math.min(100, placementScore + 30)}%
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Progress Overview */}
         <div className={`rounded-2xl p-5 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-sm`}>
@@ -46,7 +75,6 @@ export const HomeScreen: React.FC = () => {
             Your Progress
           </h3>
 
-          {/* Progress Bar */}
           <div className="mb-4">
             <div className="flex justify-between text-sm mb-2">
               <span className={darkMode ? 'text-gray-400' : 'text-gray-500'}>Completion</span>
@@ -60,19 +88,22 @@ export const HomeScreen: React.FC = () => {
             </div>
           </div>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-4 gap-2">
             <div className={`p-3 rounded-xl text-center ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
-              <div className="text-2xl font-bold text-blue-500">{progress.completedDays.length}</div>
-              <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Days Done</div>
+              <div className="text-xl font-bold text-blue-500">{progress.completedSessions.length}</div>
+              <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Sessions</div>
             </div>
             <div className={`p-3 rounded-xl text-center ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
-              <div className="text-2xl font-bold text-green-500">{progress.masteredPhrases.length}</div>
+              <div className="text-xl font-bold text-green-500">{progress.masteredPhrases.length}</div>
               <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Mastered</div>
             </div>
             <div className={`p-3 rounded-xl text-center ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
-              <div className="text-2xl font-bold text-orange-500">{progress.streak}</div>
+              <div className="text-xl font-bold text-orange-500">{progress.streak}</div>
               <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Streak</div>
+            </div>
+            <div className={`p-3 rounded-xl text-center ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
+              <div className="text-xl font-bold text-purple-500">{progress.stats.totalStudyTime}</div>
+              <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Minutes</div>
             </div>
           </div>
         </div>
@@ -122,7 +153,40 @@ export const HomeScreen: React.FC = () => {
           </div>
         </div>
 
-        {/* Recent Badges */}
+        {/* Program Info */}
+        <div className={`rounded-2xl p-5 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-sm`}>
+          <h3 className={`font-semibold mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+            30-Day Program
+          </h3>
+          <div className="grid grid-cols-5 gap-1">
+            {sessions.map((s) => {
+              const isCompleted = progress.completedSessions.includes(s.session);
+              const isCurrent = s.session === nextSession;
+              return (
+                <button
+                  key={s.session}
+                  onClick={() => {
+                    selectSession(s.session);
+                    setView('session-flow');
+                  }}
+                  className={`aspect-square rounded-lg flex items-center justify-center text-xs font-medium transition-colors ${
+                    isCompleted
+                      ? 'bg-green-500 text-white'
+                      : isCurrent
+                        ? 'bg-blue-500 text-white ring-2 ring-blue-300'
+                        : darkMode
+                          ? 'bg-gray-700 text-gray-400'
+                          : 'bg-gray-100 text-gray-500'
+                  }`}
+                >
+                  {isCompleted ? '✓' : s.session}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Earned Badges */}
         {progress.badges.filter(b => b.earnedAt).length > 0 && (
           <div className={`rounded-2xl p-5 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-sm`}>
             <h3 className={`font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppStore } from '../../stores/useAppStore';
 import { Header } from '../common/Header';
-import { dayLessons } from '../../data/phrases';
+import { sessions } from '../../data/phrases';
 
 const categoryColors: Record<string, { bg: string; darkBg: string; text: string }> = {
   greeting: { bg: 'bg-blue-100', darkBg: 'bg-blue-900/30', text: 'text-blue-600' },
@@ -17,29 +17,30 @@ const categoryColors: Record<string, { bg: string; darkBg: string; text: string 
 };
 
 export const LessonList: React.FC = () => {
-  const { darkMode, progress, setView, selectDay } = useAppStore();
+  const { darkMode, progress, setView, selectSession, startSession } = useAppStore();
 
-  const handleSelectDay = (day: number) => {
-    selectDay(day);
-    setView('lesson-detail');
+  const handleSelectSession = (session: number) => {
+    selectSession(session);
+    startSession();
+    setView('session-flow');
   };
 
   return (
     <div className={`min-h-screen pb-20 ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}`}>
-      <Header title="30-Day Lessons" />
+      <Header title="15 Sessions" />
 
       <main className="max-w-lg mx-auto px-4 py-6">
         <div className="space-y-3">
-          {dayLessons.map((lesson) => {
-            const isCompleted = progress.completedDays.includes(lesson.day);
-            const isLocked = lesson.day > progress.currentDay && !isCompleted;
-            const isCurrent = lesson.day === progress.currentDay;
-            const colors = categoryColors[lesson.category] || categoryColors.daily;
+          {sessions.map((session) => {
+            const isCompleted = progress.completedSessions.includes(session.session);
+            const isLocked = session.session > progress.currentSession && !isCompleted;
+            const isCurrent = session.session === progress.currentSession;
+            const colors = categoryColors[session.category] || categoryColors.daily;
 
             return (
               <button
-                key={lesson.day}
-                onClick={() => !isLocked && handleSelectDay(lesson.day)}
+                key={session.session}
+                onClick={() => !isLocked && handleSelectSession(session.session)}
                 disabled={isLocked}
                 className={`w-full text-left p-4 rounded-xl transition-all ${
                   isLocked
@@ -52,7 +53,6 @@ export const LessonList: React.FC = () => {
                 } ${isCurrent ? 'ring-2 ring-blue-500' : ''}`}
               >
                 <div className="flex items-center gap-4">
-                  {/* Day Number */}
                   <div
                     className={`w-12 h-12 rounded-full flex items-center justify-center font-bold ${
                       isCompleted
@@ -73,31 +73,32 @@ export const LessonList: React.FC = () => {
                         <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                       </svg>
                     ) : (
-                      lesson.day
+                      session.session
                     )}
                   </div>
 
-                  {/* Lesson Info */}
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <span className={`text-xs px-2 py-0.5 rounded-full ${darkMode ? colors.darkBg : colors.bg} ${colors.text}`}>
-                        {lesson.category}
+                        {session.category}
+                      </span>
+                      <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+                        Day {session.calendarDay}
                       </span>
                       {isCurrent && (
                         <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500 text-white">
-                          Today
+                          Next
                         </span>
                       )}
                     </div>
                     <h3 className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                      {lesson.title}
+                      {session.title}
                     </h3>
                     <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                      {lesson.titleJa}
+                      {session.titleJa} - {session.phrases.length} phrases / 60 min
                     </p>
                   </div>
 
-                  {/* Arrow */}
                   {!isLocked && (
                     <svg className={`w-5 h-5 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

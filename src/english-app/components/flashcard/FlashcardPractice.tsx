@@ -16,15 +16,18 @@ export const FlashcardPractice: React.FC = () => {
   const [reviewCount, setReviewCount] = useState(0);
   const [animationClass, setAnimationClass] = useState('');
 
+  const getAvailablePhrases = () => {
+    const availableSessions = [...progress.completedSessions, progress.currentSession];
+    return allPhrases.filter(p => availableSessions.includes(p.session));
+  };
+
   useEffect(() => {
-    const availableDays = [...progress.completedDays, progress.currentDay];
-    const phrases = allPhrases.filter(p => availableDays.includes(p.day));
-    // Prioritize review phrases
+    const phrases = getAvailablePhrases();
     const reviewPhrases = phrases.filter(p => progress.reviewPhrases.includes(p.id));
     const otherPhrases = phrases.filter(p => !progress.reviewPhrases.includes(p.id) && !progress.masteredPhrases.includes(p.id));
     const combined = [...reviewPhrases, ...otherPhrases.sort(() => Math.random() - 0.5)].slice(0, 20);
     setCards(combined);
-  }, [progress.completedDays, progress.currentDay, progress.reviewPhrases, progress.masteredPhrases]);
+  }, [progress.completedSessions, progress.currentSession, progress.reviewPhrases, progress.masteredPhrases]);
 
   const currentCard = cards[currentIndex];
   const remaining = cards.length - currentIndex;
@@ -60,8 +63,7 @@ export const FlashcardPractice: React.FC = () => {
   };
 
   const handleRestart = () => {
-    const availableDays = [...progress.completedDays, progress.currentDay];
-    const phrases = allPhrases.filter(p => availableDays.includes(p.day));
+    const phrases = getAvailablePhrases();
     const shuffled = phrases.sort(() => Math.random() - 0.5).slice(0, 20);
     setCards(shuffled);
     setCurrentIndex(0);
@@ -79,7 +81,7 @@ export const FlashcardPractice: React.FC = () => {
             onClick={() => setView('lesson')}
             className="px-4 py-2 bg-blue-500 text-white rounded-lg"
           >
-            Start a Lesson First
+            Start a Session First
           </button>
         </div>
       </div>
@@ -123,7 +125,6 @@ export const FlashcardPractice: React.FC = () => {
       <Header title="Flashcards" showBack />
 
       <main className="max-w-lg mx-auto px-4 py-6">
-        {/* Stats */}
         <div className="flex justify-between items-center mb-6">
           <div className="flex gap-4">
             <span className="text-green-500 font-medium">{masteredCount} mastered</span>
@@ -134,7 +135,6 @@ export const FlashcardPractice: React.FC = () => {
           </span>
         </div>
 
-        {/* Card */}
         <div className="perspective-1000 mb-6">
           <div
             onClick={handleFlip}
@@ -146,51 +146,35 @@ export const FlashcardPractice: React.FC = () => {
               transformStyle: 'preserve-3d',
             }}
           >
-            {/* Front */}
             <div
               className={`absolute inset-0 rounded-2xl p-6 flex flex-col items-center justify-center backface-hidden ${
                 darkMode ? 'bg-gray-800' : 'bg-white'
               } shadow-lg`}
               style={{ backfaceVisibility: 'hidden' }}
             >
-              <p className={`text-lg mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                Japanese
-              </p>
+              <p className={`text-lg mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Japanese</p>
               <p className={`text-2xl font-bold text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                 {currentCard.japanese}
               </p>
-              <p className={`text-sm mt-4 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-                Tap to flip
-              </p>
+              <p className={`text-sm mt-4 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>Tap to flip</p>
             </div>
-
-            {/* Back */}
             <div
               className={`absolute inset-0 rounded-2xl p-6 flex flex-col items-center justify-center ${
                 darkMode ? 'bg-blue-900' : 'bg-blue-500'
               } text-white shadow-lg`}
-              style={{
-                backfaceVisibility: 'hidden',
-                transform: 'rotateY(180deg)',
-              }}
+              style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
             >
               <p className="text-lg mb-2 opacity-80">English</p>
-              <p className="text-2xl font-bold text-center mb-2">
-                {currentCard.english}
-              </p>
-              <p className="text-sm opacity-70">
-                /{currentCard.pronunciation}/
-              </p>
+              <p className="text-2xl font-bold text-center mb-2">{currentCard.english}</p>
+              <p className="text-sm opacity-70">/{currentCard.pronunciation}/</p>
             </div>
           </div>
         </div>
 
-        {/* Instructions */}
         <p className={`text-center text-sm mb-6 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
           Did you know this phrase?
         </p>
 
-        {/* Swipe Buttons */}
         <div className="flex gap-4">
           <button
             onClick={() => handleSwipe('left')}
@@ -216,7 +200,6 @@ export const FlashcardPractice: React.FC = () => {
           </button>
         </div>
 
-        {/* Progress Bar */}
         <div className="mt-6">
           <div className={`h-2 rounded-full ${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
             <div
@@ -228,24 +211,10 @@ export const FlashcardPractice: React.FC = () => {
       </main>
 
       <style>{`
-        .slide-right {
-          animation: slideRight 0.3s ease-out forwards;
-        }
-        .slide-left {
-          animation: slideLeft 0.3s ease-out forwards;
-        }
-        @keyframes slideRight {
-          to {
-            transform: translateX(150%) rotate(20deg);
-            opacity: 0;
-          }
-        }
-        @keyframes slideLeft {
-          to {
-            transform: translateX(-150%) rotate(-20deg);
-            opacity: 0;
-          }
-        }
+        .slide-right { animation: slideRight 0.3s ease-out forwards; }
+        .slide-left { animation: slideLeft 0.3s ease-out forwards; }
+        @keyframes slideRight { to { transform: translateX(150%) rotate(20deg); opacity: 0; } }
+        @keyframes slideLeft { to { transform: translateX(-150%) rotate(-20deg); opacity: 0; } }
       `}</style>
     </div>
   );

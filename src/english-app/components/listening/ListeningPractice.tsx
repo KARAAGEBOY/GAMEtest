@@ -15,11 +15,11 @@ export const ListeningPractice: React.FC = () => {
   const [listenCount, setListenCount] = useState(0);
 
   useEffect(() => {
-    const availableDays = [...progress.completedDays, progress.currentDay];
-    const phrases = allPhrases.filter(p => availableDays.includes(p.day));
+    const availableSessions = [...progress.completedSessions, progress.currentSession];
+    const phrases = allPhrases.filter(p => availableSessions.includes(p.session));
     const shuffled = phrases.sort(() => Math.random() - 0.5).slice(0, 10);
     setCurrentPhrases(shuffled);
-  }, [progress.completedDays, progress.currentDay]);
+  }, [progress.completedSessions, progress.currentSession]);
 
   const currentPhrase = currentPhrases[currentIndex];
 
@@ -52,7 +52,7 @@ export const ListeningPractice: React.FC = () => {
             onClick={() => setView('lesson')}
             className="px-4 py-2 bg-blue-500 text-white rounded-lg"
           >
-            Start a Lesson First
+            Start a Session First
           </button>
         </div>
       </div>
@@ -64,7 +64,6 @@ export const ListeningPractice: React.FC = () => {
       <Header title="Listening Practice" showBack />
 
       <main className="max-w-lg mx-auto px-4 py-6">
-        {/* Browser Support Warning */}
         {!isSupported && (
           <div className={`p-4 rounded-xl mb-6 ${darkMode ? 'bg-yellow-900/30' : 'bg-yellow-50'}`}>
             <p className={`text-sm ${darkMode ? 'text-yellow-400' : 'text-yellow-700'}`}>
@@ -73,7 +72,6 @@ export const ListeningPractice: React.FC = () => {
           </div>
         )}
 
-        {/* Progress */}
         <div className="flex justify-between items-center mb-6">
           <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
             Phrase {currentIndex + 1} of {currentPhrases.length}
@@ -83,7 +81,6 @@ export const ListeningPractice: React.FC = () => {
           </span>
         </div>
 
-        {/* Instructions */}
         <div className={`rounded-2xl p-6 mb-6 text-center ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
           <p className={`text-lg mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
             Listen and try to understand
@@ -93,16 +90,12 @@ export const ListeningPractice: React.FC = () => {
           </p>
         </div>
 
-        {/* Audio Controls */}
         <div className={`rounded-2xl p-6 mb-6 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
-          {/* Main Listen Button */}
           <button
             onClick={() => handleListen(0.9)}
             disabled={isSpeaking}
             className={`w-full py-6 mb-4 rounded-2xl flex flex-col items-center justify-center gap-2 ${
-              isSpeaking
-                ? 'bg-green-300'
-                : 'bg-green-500 hover:bg-green-600'
+              isSpeaking ? 'bg-green-300' : 'bg-green-500 hover:bg-green-600'
             } text-white transition-colors`}
           >
             <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
@@ -112,8 +105,6 @@ export const ListeningPractice: React.FC = () => {
               {isSpeaking ? 'Playing...' : 'Listen'}
             </span>
           </button>
-
-          {/* Speed Controls */}
           <div className="flex gap-3">
             <button
               onClick={() => handleListen(0.6)}
@@ -136,7 +127,6 @@ export const ListeningPractice: React.FC = () => {
           </div>
         </div>
 
-        {/* Show Answer */}
         <div className={`rounded-2xl p-6 mb-6 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
           {showAnswer ? (
             <div>
@@ -168,7 +158,6 @@ export const ListeningPractice: React.FC = () => {
           )}
         </div>
 
-        {/* Navigation */}
         <button
           onClick={handleNext}
           className="w-full py-4 rounded-xl font-medium bg-blue-500 hover:bg-blue-600 text-white transition-colors"
@@ -176,7 +165,6 @@ export const ListeningPractice: React.FC = () => {
           Next Phrase
         </button>
 
-        {/* Tips */}
         <div className={`mt-6 p-4 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
           <h4 className={`font-medium mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
             Listening Tips

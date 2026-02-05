@@ -10,14 +10,11 @@ const generateQuestions = (phrases: Phrase[], count: number = 10): QuizQuestion[
 
   return selected.map((phrase, index) => {
     const type = index % 2 === 0 ? 'english_to_japanese' : 'japanese_to_english';
-
-    // Get wrong answers from other phrases
     const otherPhrases = phrases.filter(p => p.id !== phrase.id);
     const wrongAnswers = otherPhrases
       .sort(() => Math.random() - 0.5)
       .slice(0, 3)
       .map(p => type === 'english_to_japanese' ? p.japanese : p.english);
-
     const correctAnswer = type === 'english_to_japanese' ? phrase.japanese : phrase.english;
     const options = [...wrongAnswers, correctAnswer].sort(() => Math.random() - 0.5);
 
@@ -42,25 +39,26 @@ export const QuizPractice: React.FC = () => {
   const [score, setScore] = useState(0);
   const [showResults, setShowResults] = useState(false);
 
+  const getAvailablePhrases = () => {
+    const availableSessions = [...progress.completedSessions, progress.currentSession];
+    return allPhrases.filter(p => availableSessions.includes(p.session));
+  };
+
   useEffect(() => {
-    const availableDays = [...progress.completedDays, progress.currentDay];
-    const phrases = allPhrases.filter(p => availableDays.includes(p.day));
+    const phrases = getAvailablePhrases();
     if (phrases.length >= 4) {
       setQuestions(generateQuestions(phrases, 10));
     }
-  }, [progress.completedDays, progress.currentDay]);
+  }, [progress.completedSessions, progress.currentSession]);
 
   const currentQuestion = questions[currentIndex];
 
   const handleSelectAnswer = (answer: string) => {
     if (isAnswered) return;
-
     setSelectedAnswer(answer);
     setIsAnswered(true);
-
     const isCorrect = answer === currentQuestion.correctAnswer;
     incrementQuizStats(isCorrect);
-
     if (isCorrect) {
       setScore(s => s + 1);
     }
@@ -72,7 +70,6 @@ export const QuizPractice: React.FC = () => {
       setSelectedAnswer(null);
       setIsAnswered(false);
     } else {
-      // Check for perfect score badge
       if (score === questions.length) {
         earnBadge('perfect_quiz');
       }
@@ -81,8 +78,7 @@ export const QuizPractice: React.FC = () => {
   };
 
   const handleRestart = () => {
-    const availableDays = [...progress.completedDays, progress.currentDay];
-    const phrases = allPhrases.filter(p => availableDays.includes(p.day));
+    const phrases = getAvailablePhrases();
     setQuestions(generateQuestions(phrases, 10));
     setCurrentIndex(0);
     setSelectedAnswer(null);
@@ -122,17 +118,14 @@ export const QuizPractice: React.FC = () => {
             <h2 className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
               {isPerfect ? 'Perfect Score!' : percentage >= 70 ? 'Great Job!' : 'Keep Practicing!'}
             </h2>
-
             <div className={`text-5xl font-bold my-6 ${
               percentage >= 70 ? 'text-green-500' : percentage >= 50 ? 'text-yellow-500' : 'text-red-500'
             }`}>
               {percentage}%
             </div>
-
             <p className={`mb-6 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
               You got {score} out of {questions.length} correct
             </p>
-
             {isPerfect && (
               <div className={`p-4 rounded-xl mb-6 ${darkMode ? 'bg-yellow-900/30' : 'bg-yellow-50'}`}>
                 <p className={`font-medium ${darkMode ? 'text-yellow-400' : 'text-yellow-700'}`}>
@@ -140,7 +133,6 @@ export const QuizPractice: React.FC = () => {
                 </p>
               </div>
             )}
-
             <div className="flex gap-3">
               <button
                 onClick={() => setView('home')}
@@ -168,7 +160,6 @@ export const QuizPractice: React.FC = () => {
       <Header title="Quiz" showBack />
 
       <main className="max-w-lg mx-auto px-4 py-6">
-        {/* Progress */}
         <div className="flex justify-between items-center mb-4">
           <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
             Question {currentIndex + 1} of {questions.length}
@@ -185,7 +176,6 @@ export const QuizPractice: React.FC = () => {
           />
         </div>
 
-        {/* Question */}
         <div className={`rounded-2xl p-6 mb-6 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
           <p className={`text-sm mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
             {currentQuestion.type === 'english_to_japanese'
@@ -197,7 +187,6 @@ export const QuizPractice: React.FC = () => {
           </p>
         </div>
 
-        {/* Options */}
         <div className="space-y-3 mb-6">
           {currentQuestion.options.map((option, index) => {
             const isSelected = selectedAnswer === option;
@@ -211,32 +200,21 @@ export const QuizPractice: React.FC = () => {
                 onClick={() => handleSelectAnswer(option)}
                 disabled={isAnswered}
                 className={`w-full p-4 rounded-xl text-left transition-all ${
-                  showCorrect
-                    ? 'bg-green-500 text-white'
-                    : showWrong
-                      ? 'bg-red-500 text-white'
-                      : isSelected
-                        ? 'ring-2 ring-blue-500'
-                        : ''
+                  showCorrect ? 'bg-green-500 text-white'
+                  : showWrong ? 'bg-red-500 text-white'
+                  : isSelected ? 'ring-2 ring-blue-500'
+                  : ''
                 } ${
                   !isAnswered
-                    ? darkMode
-                      ? 'bg-gray-800 hover:bg-gray-700'
-                      : 'bg-white hover:bg-gray-50'
-                    : darkMode
-                      ? 'bg-gray-800'
-                      : 'bg-white'
+                    ? darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:bg-gray-50'
+                    : darkMode ? 'bg-gray-800' : 'bg-white'
                 } shadow-sm`}
               >
                 <div className="flex items-center gap-3">
                   <span className={`w-8 h-8 rounded-full flex items-center justify-center font-medium ${
-                    showCorrect
-                      ? 'bg-green-600'
-                      : showWrong
-                        ? 'bg-red-600'
-                        : darkMode
-                          ? 'bg-gray-700'
-                          : 'bg-gray-100'
+                    showCorrect ? 'bg-green-600'
+                    : showWrong ? 'bg-red-600'
+                    : darkMode ? 'bg-gray-700' : 'bg-gray-100'
                   }`}>
                     {showCorrect ? '✓' : showWrong ? '✗' : String.fromCharCode(65 + index)}
                   </span>
@@ -251,7 +229,6 @@ export const QuizPractice: React.FC = () => {
           })}
         </div>
 
-        {/* Feedback & Next */}
         {isAnswered && (
           <div className="space-y-4">
             <div className={`p-4 rounded-xl ${
@@ -269,7 +246,6 @@ export const QuizPractice: React.FC = () => {
                   : `Incorrect. The answer was: ${currentQuestion.correctAnswer}`}
               </p>
             </div>
-
             <button
               onClick={handleNext}
               className="w-full py-4 rounded-xl font-medium bg-blue-500 hover:bg-blue-600 text-white transition-colors"

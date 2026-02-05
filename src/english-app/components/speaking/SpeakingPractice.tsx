@@ -17,13 +17,11 @@ export const SpeakingPractice: React.FC = () => {
   const [attempts, setAttempts] = useState(0);
 
   useEffect(() => {
-    // Get phrases from completed days or current day
-    const availableDays = [...progress.completedDays, progress.currentDay];
-    const phrases = allPhrases.filter(p => availableDays.includes(p.day));
-    // Shuffle and take 10
+    const availableSessions = [...progress.completedSessions, progress.currentSession];
+    const phrases = allPhrases.filter(p => availableSessions.includes(p.session));
     const shuffled = phrases.sort(() => Math.random() - 0.5).slice(0, 10);
     setCurrentPhrases(shuffled);
-  }, [progress.completedDays, progress.currentDay]);
+  }, [progress.completedSessions, progress.currentSession]);
 
   const currentPhrase = currentPhrases[currentIndex];
 
@@ -62,7 +60,6 @@ export const SpeakingPractice: React.FC = () => {
     if (currentIndex < currentPhrases.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      // Reshuffle
       const shuffled = currentPhrases.sort(() => Math.random() - 0.5);
       setCurrentPhrases([...shuffled]);
       setCurrentIndex(0);
@@ -83,7 +80,7 @@ export const SpeakingPractice: React.FC = () => {
             onClick={() => setView('lesson')}
             className="px-4 py-2 bg-blue-500 text-white rounded-lg"
           >
-            Start a Lesson First
+            Start a Session First
           </button>
         </div>
       </div>
@@ -95,7 +92,6 @@ export const SpeakingPractice: React.FC = () => {
       <Header title="Speaking Practice" showBack />
 
       <main className="max-w-lg mx-auto px-4 py-6">
-        {/* Browser Support Warning */}
         {!isRecognitionSupported && (
           <div className={`p-4 rounded-xl mb-6 ${darkMode ? 'bg-yellow-900/30' : 'bg-yellow-50'}`}>
             <p className={`text-sm ${darkMode ? 'text-yellow-400' : 'text-yellow-700'}`}>
@@ -104,7 +100,6 @@ export const SpeakingPractice: React.FC = () => {
           </div>
         )}
 
-        {/* Progress */}
         <div className="flex justify-between items-center mb-6">
           <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
             Phrase {currentIndex + 1} of {currentPhrases.length}
@@ -114,7 +109,6 @@ export const SpeakingPractice: React.FC = () => {
           </span>
         </div>
 
-        {/* Phrase Card */}
         <div className={`rounded-2xl p-6 mb-6 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
           <p className={`text-2xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
             {currentPhrase.english}
@@ -127,14 +121,11 @@ export const SpeakingPractice: React.FC = () => {
           </p>
         </div>
 
-        {/* Listen Button */}
         <button
           onClick={handleListen}
           disabled={isSpeaking}
           className={`w-full py-3 mb-6 rounded-xl flex items-center justify-center gap-2 ${
-            isSpeaking
-              ? 'bg-blue-300'
-              : 'bg-blue-500 hover:bg-blue-600'
+            isSpeaking ? 'bg-blue-300' : 'bg-blue-500 hover:bg-blue-600'
           } text-white font-medium transition-colors`}
         >
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -143,14 +134,11 @@ export const SpeakingPractice: React.FC = () => {
           {isSpeaking ? 'Playing...' : 'Listen First'}
         </button>
 
-        {/* Recording Section */}
         {isRecognitionSupported && (
           <div className={`rounded-2xl p-6 mb-6 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
             <h3 className={`font-semibold mb-4 text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
               Your Turn!
             </h3>
-
-            {/* Microphone Button */}
             <div className="flex justify-center mb-4">
               <button
                 onMouseDown={handleStartSpeaking}
@@ -170,12 +158,9 @@ export const SpeakingPractice: React.FC = () => {
                 </svg>
               </button>
             </div>
-
             <p className={`text-center text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
               {isListening ? 'Listening... Release to check' : 'Press and hold to speak'}
             </p>
-
-            {/* Transcript */}
             {transcript && (
               <div className={`mt-4 p-3 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-gray-100'}`}>
                 <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>You said:</p>
@@ -185,7 +170,6 @@ export const SpeakingPractice: React.FC = () => {
           </div>
         )}
 
-        {/* Result */}
         {result && (
           <div className={`rounded-2xl p-6 mb-6 ${
             result.isCorrect
@@ -197,7 +181,6 @@ export const SpeakingPractice: React.FC = () => {
                 {result.similarity >= 85 ? '🎉' : result.isCorrect ? '👍' : '💪'}
               </span>
             </div>
-
             <div className="text-center mb-4">
               <p className={`text-2xl font-bold ${
                 result.isCorrect
@@ -210,7 +193,6 @@ export const SpeakingPractice: React.FC = () => {
                 {result.similarity >= 85 ? 'Excellent!' : result.isCorrect ? 'Good job!' : 'Keep practicing!'}
               </p>
             </div>
-
             <div className="flex gap-3">
               <button
                 onClick={handleTryAgain}
