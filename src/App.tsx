@@ -1,15 +1,7 @@
-import { useAppSelector } from './store/hooks';
-import TitleScreen from './components/layout/TitleScreen';
-import GameContainer from './components/game/GameContainer';
+import EnglishApp from './english-app/EnglishApp';
 
 function App() {
-  const gameStatus = useAppSelector((state) => state.game.gameStatus);
-
-  return (
-    <div className="min-h-screen bg-game-bg">
-      {gameStatus === 'menu' ? <TitleScreen /> : <GameContainer />}
-    </div>
-  );
+  return <EnglishApp />;
 }
 
 export default App;
